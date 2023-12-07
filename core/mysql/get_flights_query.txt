@@ -1,0 +1,16 @@
+SELECT 
+        f.id, 
+        f.DEP_AIRPORT, 
+        f.ARR_AIRPORT,
+        DATE_ADD(f.time_dep, INTERVAL t1.timezone HOUR) AS localtime_dep,
+        DATE_ADD(f.time_arr, INTERVAL t2.timezone HOUR) AS localtime_arr,
+        f.FLIGHT_COMPANY, 
+        f.status, 
+        f.available_seats, 
+        f.max_seats, 
+        f.price,
+        FORMAT(COALESCE(f.price * (1-o.discount/100), f.price), 2) AS discounted_price
+        FROM flights AS f
+        JOIN locations AS t1 ON f.dep_airport = t1.airport
+        JOIN locations AS t2 ON f.arr_airport = t2.airport
+        LEFT JOIN offers AS o ON f.id = o.id
