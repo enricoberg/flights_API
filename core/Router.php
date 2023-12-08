@@ -4,6 +4,7 @@ namespace App\Core;
 require_once "./app/controllers/FlightsController.php";
 require_once "./app/controllers/LocationsController.php";
 require_once "./app/controllers/OffersController.php";
+require_once "./app/controllers/BookController.php";
 class Router
 {
     public $routes = [

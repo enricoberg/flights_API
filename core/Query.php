@@ -69,6 +69,24 @@ class Query{
                             }
         mysqli_close($connection);
     }
+
+    public function getRaw($query_string){
+        
+            $database = new Database();
+            $connection = $database->connection();        
+            try{
+                $result = mysqli_query($connection, $query_string);
+                $emparray = array();
+                while($row =mysqli_fetch_assoc($result))    $emparray[] = $row;            
+                if(empty($emparray))  Response::message("NO RESULTS FOUND", 404);
+                else                  return $emparray;       
+            
+            }
+            catch(\Exception $e) { Response::message("WRONG QUERY", 400); }
+        
+        mysqli_close($connection);
+        
+    }
 }
 
 

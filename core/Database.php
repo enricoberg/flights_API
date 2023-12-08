@@ -5,9 +5,7 @@ class Database{
     public static function connection() {
 
         $envFile = __DIR__ . '/../.env';
-        $env = file_get_contents($envFile); 
-    
-        
+        $env = file_get_contents($envFile);    
         $envVariables = [];
         foreach (explode("\n", $env) as $line) {
             $line = trim($line);
