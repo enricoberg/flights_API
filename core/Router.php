@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Core;
+
 require_once "./app/controllers/FlightsController.php";
 require_once "./app/controllers/LocationsController.php";
 require_once "./app/controllers/OffersController.php";
@@ -23,8 +24,8 @@ class Router
     }
 
     public function get($uri, $controller)
-    {   
-        
+    {
+
         $this->routes['GET'][$uri] = $controller;
     }
 
@@ -44,16 +45,16 @@ class Router
     }
 
     public function direct($uri, $requestType)
-    {   
-        
+    {
+
         $pattern_flight = '/(?:^|[^\/])flights\/\d+/'; // Define the pattern to match flights/{number}
-        $uri= (preg_match($pattern_flight, $uri))? preg_replace($pattern_flight, 'flights', $uri): $uri;
-        $pattern_location = '/(?:^|[^\/])locations\/\w+/';         
-        $uri= (preg_match($pattern_location, $uri))? preg_replace($pattern_location, 'locations', $uri): $uri;
-        $pattern_offer = '/(?:^|[^\/])offers\/\d+/'; 
-        $uri= (preg_match($pattern_offer, $uri))? preg_replace($pattern_offer, 'offers', $uri): $uri;
-        
-        
+        $uri = (preg_match($pattern_flight, $uri)) ? preg_replace($pattern_flight, 'flights', $uri) : $uri;
+        $pattern_location = '/(?:^|[^\/])locations\/\w+/';
+        $uri = (preg_match($pattern_location, $uri)) ? preg_replace($pattern_location, 'locations', $uri) : $uri;
+        $pattern_offer = '/(?:^|[^\/])offers\/\d+/';
+        $uri = (preg_match($pattern_offer, $uri)) ? preg_replace($pattern_offer, 'offers', $uri) : $uri;
+
+
 
 
         if (array_key_exists($uri, $this->routes[$requestType])) {
@@ -64,14 +65,14 @@ class Router
 
         throw new \RuntimeException('No route defined for this URI.');
     }
-      
+
 
     protected function callAction($controller, $action)
-    {   
+    {
         $controller = "App\\App\\Controllers\\{$controller}";
         $controller = new $controller;
 
-        if (! method_exists($controller, $action)) {
+        if (!method_exists($controller, $action)) {
             throw new \RuntimeException(
                 "{$controller} does not respond to the {$action} action."
             );
@@ -80,5 +81,3 @@ class Router
         return $controller->$action();
     }
 }
-
-?>

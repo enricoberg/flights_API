@@ -19,7 +19,4 @@ class Response
     echo ($data);
     exit();
   }
-
 }
-
-?>
