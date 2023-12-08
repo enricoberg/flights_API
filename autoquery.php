@@ -1,7 +1,4 @@
 <?php
-    
-  
-
     require_once "./core/Database.php";
     require_once "./core/Query.php";
     use App\Core\Database as Database;

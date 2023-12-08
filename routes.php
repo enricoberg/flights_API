@@ -13,12 +13,3 @@ $router->post('offers', 'OffersController@addOffer');
 $router->patch('offers', 'OffersController@patchOffer');
 $router->delete('offers', 'OffersController@deleteOffer');
 $router->get('book', 'BookController@getBooking');
-
-
-
-
-
-
-
-
-?>
