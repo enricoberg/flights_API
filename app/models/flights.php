@@ -96,13 +96,8 @@ class Flights{
 
     }
     public static function deleteFlight($id){
-        $base_query="DELETE FROM FLIGHTS WHERE ID =$id ";
-        return $base_query;
-    }
-    
-    
-
-
+        return "DELETE FROM FLIGHTS WHERE ID =$id ";
+    }    
 }
 
 

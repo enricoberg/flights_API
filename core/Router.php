@@ -3,6 +3,7 @@
 namespace App\Core;
 require_once "./app/controllers/FlightsController.php";
 require_once "./app/controllers/LocationsController.php";
+require_once "./app/controllers/OffersController.php";
 class Router
 {
     public $routes = [
@@ -48,6 +49,8 @@ class Router
         $uri= (preg_match($pattern_flight, $uri))? preg_replace($pattern_flight, 'flights', $uri): $uri;
         $pattern_location = '/(?:^|[^\/])locations\/\w+/';         
         $uri= (preg_match($pattern_location, $uri))? preg_replace($pattern_location, 'locations', $uri): $uri;
+        $pattern_offer = '/(?:^|[^\/])offers\/\d+/'; 
+        $uri= (preg_match($pattern_offer, $uri))? preg_replace($pattern_offer, 'offers', $uri): $uri;
         
         
 

@@ -1,0 +1,1 @@
+SELECT o.*  FROM offers o INNER JOIN flights f ON o.id = f.id
