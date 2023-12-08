@@ -2,6 +2,7 @@
 
 namespace App\Core;
 require_once "./app/controllers/FlightsController.php";
+require_once "./app/controllers/LocationsController.php";
 class Router
 {
     public $routes = [
@@ -43,10 +44,14 @@ class Router
     public function direct($uri, $requestType)
     {   
         
-        $pattern = '/(?:^|[^\/])flights\/\d+/'; // Define the pattern to match flights/{number}
-
-        $uri= preg_replace($pattern, 'flights', $uri);
+        $pattern_flight = '/(?:^|[^\/])flights\/\d+/'; // Define the pattern to match flights/{number}
+        $uri= (preg_match($pattern_flight, $uri))? preg_replace($pattern_flight, 'flights', $uri): $uri;
+        $pattern_location = '/(?:^|[^\/])locations\/\w+/';         
+        $uri= (preg_match($pattern_location, $uri))? preg_replace($pattern_location, 'locations', $uri): $uri;
         
+        
+
+
         if (array_key_exists($uri, $this->routes[$requestType])) {
             return $this->callAction(
                 ...explode('@', $this->routes[$requestType][$uri])
