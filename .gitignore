@@ -1,5 +1,1 @@
 .env
-vendor/
-composer.json
-composer.lock
-.php-cs-fixer.php
